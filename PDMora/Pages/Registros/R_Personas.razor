@@ -1,0 +1,46 @@
+@page "/Personas"
+
+<EditForm Model="persona" OnValidSubmit="Guardar">
+    <DataAnnotationsValidator />
+    <ValidationSummary />
+
+    <div class="card">
+        
+    </div>
+    
+    <button type="submit">Submit</button>
+</EditForm>
+
+
+@code
+{
+    private Personas persona = new Personas();
+
+    protected override void OnInitialized()
+    {
+        Nuevo();
+    }
+
+    
+
+    public void Nuevo()
+    {
+        persona = new Personas();
+    }
+    public void Guardar()
+    {
+
+    }
+
+    public void Eliminar()
+    {
+
+    }
+
+    public void Buscar()
+    {
+
+    }
+}
+
+        protected override void

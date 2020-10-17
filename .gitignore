@@ -1,0 +1,5 @@
+PDMora/bin/*.*
+PDMora/bin/Debug/*.*
+
+PDMora/obj/*.*
+PDMora/obj/Debug/*.*

@@ -25,8 +25,8 @@ namespace PDMora.Migrations
                     b.Property<DateTime>("Fecha")
                         .HasColumnType("TEXT");
 
-                    b.Property<decimal>("Total")
-                        .HasColumnType("TEXT");
+                    b.Property<double>("Total")
+                        .HasColumnType("REAL");
 
                     b.HasKey("MoraId");
 
@@ -42,11 +42,14 @@ namespace PDMora.Migrations
                     b.Property<int>("MoraId")
                         .HasColumnType("INTEGER");
 
+                    b.Property<string>("NombrePersona")
+                        .HasColumnType("TEXT");
+
                     b.Property<int>("PrestamoId")
                         .HasColumnType("INTEGER");
 
-                    b.Property<decimal>("Valor")
-                        .HasColumnType("TEXT");
+                    b.Property<double>("Valor")
+                        .HasColumnType("REAL");
 
                     b.HasKey("Id");
 

@@ -1,14 +1,62 @@
 @page "/Personas"
 
+@inject IToastService Toast
+
 <EditForm Model="persona" OnValidSubmit="Guardar">
     <DataAnnotationsValidator />
-    <ValidationSummary />
 
     <div class="card">
-        
+        <div class="card-header">
+            <h3>Registro persona</h3>
+        </div>
+
+        <div class="container">
+            <div class="card-body">
+                <form>
+                    <div class="form-group">
+                        <label>Persona ID</label>
+                        <div class="input-group">
+                            <input type="number" @bind="persona.PersonaId" class="form-control"/>
+                            <div class="input-group-append">
+                                <button type="button" class="btn btn-secondary input-group-text oi oi-magnifying-glass" @onclick="Buscar">Buscar</button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label> Nombres</label>
+                        <input type="text" @bind="persona.Nombres" class="form-control"/>
+                        <ValidationMessage For="@(() => persona.Nombres)"/>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Cédula</label>
+                        <InputText @bind-Value="persona.Cedula" class="form-control" />
+                        <ValidationMessage For="@(() => persona.Cedula)" />
+                    </div>
+
+                    <div class="form-group">
+                        <label>Fecha Nacimiento</label>
+                        <InputDate @bind-Value="persona.FechaNacimiento" class="form-control" />
+                        <ValidationMessage For="@(() => persona.FechaNacimiento)" />
+                    </div>
+
+                    <div class="form-group">
+                        <label>Balance</label>
+                        <InputNumber @bind-Value="persona.Balance" class="form-control" readOnly="true"/>
+                    </div>
+                </form>
+            </div>
+            <div class="card-footer">
+            <div class="form-group text-center" display: inline-block>
+                <button type="button" class="btn btn-lg btn-primary oi oi-file" @onclick="Nuevo">Nuevo</button>
+                <button type="submit" class="btn btn-lg btn-success oi oi-cloud-upload">Guardar</button>
+                <button type="button" class="btn btn-lg btn-danger oi oi-trash" @onclick="Eliminar">Eliminar</button>
+            </div>
+        </div>
     </div>
+</div>    
     
-    <button type="submit">Submit</button>
 </EditForm>
 
 
@@ -29,18 +77,44 @@
     }
     public void Guardar()
     {
+        bool Guardado;
 
+        Guardado = PersonasBLL.Guardar(persona);
+
+        if (Guardado)
+        {
+            Nuevo();
+            Toast.ShowSuccess("Guardado correctamente");
+        }
+        else
+            Toast.ShowError("No fue posible guardar");
     }
 
     public void Eliminar()
     {
+        bool Eliminado;
 
+        Eliminado = PersonasBLL.Eliminar(persona.PersonaId);
+
+        if (Eliminado)
+        {
+            Nuevo();
+            Toast.ShowSuccess("Eliminado correctamente");
+        }
+        else
+            Toast.ShowError("No fue posible eliminar");
     }
 
     public void Buscar()
     {
+        if (persona.PersonaId > 0)
+        {
+            var Persona = PersonasBLL.Buscar(persona.PersonaId);
 
+            if (Persona != null)
+                this.persona = Persona;
+            else
+                Toast.ShowError("Persona no encontrada");
+        }
     }
 }
-
-        protected override void

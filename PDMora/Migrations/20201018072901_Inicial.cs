@@ -14,7 +14,7 @@ namespace PDMora.Migrations
                     MoraId = table.Column<int>(nullable: false)
                         .Annotation("Sqlite:Autoincrement", true),
                     Fecha = table.Column<DateTime>(nullable: false),
-                    Total = table.Column<decimal>(nullable: false)
+                    Total = table.Column<double>(nullable: false)
                 },
                 constraints: table =>
                 {
@@ -62,7 +62,8 @@ namespace PDMora.Migrations
                         .Annotation("Sqlite:Autoincrement", true),
                     MoraId = table.Column<int>(nullable: false),
                     PrestamoId = table.Column<int>(nullable: false),
-                    Valor = table.Column<decimal>(nullable: false)
+                    NombrePersona = table.Column<string>(nullable: true),
+                    Valor = table.Column<double>(nullable: false)
                 },
                 constraints: table =>
                 {

@@ -9,6 +9,7 @@ namespace PDMora.Models
         public int Id { get; set; }
         public int MoraId { get; set; }
         public int PrestamoId { get; set; }
-        public decimal Valor { get; set; }
+        public string NombrePersona { get; set; }
+        public double Valor { get; set; }
     }
 }

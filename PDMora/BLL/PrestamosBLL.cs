@@ -75,8 +75,9 @@ namespace PDMora.BLL
             {
                 Personas persona = new Personas();
                 persona = PersonasBLL.Buscar(prestamo.PersonaId);
-                prestamo.Balance += prestamo.Monto;
-                persona.Balance = prestamo.Balance;
+                persona.Balance -= prestamo.Balance;
+                prestamo.Balance = prestamo.Monto;
+                persona.Balance += prestamo.Balance;
                 PersonasBLL.Guardar(persona);
                 contexto.Entry(prestamo).State = EntityState.Modified;
                 Modificado = (contexto.SaveChanges() > 0);

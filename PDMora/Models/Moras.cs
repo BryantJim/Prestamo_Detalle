@@ -10,7 +10,7 @@ namespace PDMora.Models
         [Key]
         public int MoraId { get; set; }
         public DateTime Fecha { get; set; }
-        public decimal Total { get; set; }
+        public double Total { get; set; }
 
         [ForeignKey("MoraId")]
         public List<MorasDetalle> Detalle { get; set; }

@@ -9,7 +9,7 @@ using PDMora.DAL;
 namespace PDMora.Migrations
 {
     [DbContext(typeof(Contexto))]
-    [Migration("20201017160842_Inicial")]
+    [Migration("20201018072901_Inicial")]
     partial class Inicial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -27,8 +27,8 @@ namespace PDMora.Migrations
                     b.Property<DateTime>("Fecha")
                         .HasColumnType("TEXT");
 
-                    b.Property<decimal>("Total")
-                        .HasColumnType("TEXT");
+                    b.Property<double>("Total")
+                        .HasColumnType("REAL");
 
                     b.HasKey("MoraId");
 
@@ -44,11 +44,14 @@ namespace PDMora.Migrations
                     b.Property<int>("MoraId")
                         .HasColumnType("INTEGER");
 
+                    b.Property<string>("NombrePersona")
+                        .HasColumnType("TEXT");
+
                     b.Property<int>("PrestamoId")
                         .HasColumnType("INTEGER");
 
-                    b.Property<decimal>("Valor")
-                        .HasColumnType("TEXT");
+                    b.Property<double>("Valor")
+                        .HasColumnType("REAL");
 
                     b.HasKey("Id");
 

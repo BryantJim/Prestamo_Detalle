@@ -182,16 +182,34 @@
 
     public void Eliminar()
     {
-        bool Eliminado;
+        bool Eliminado = false;
 
-        Eliminado = MorasBLL.Eliminar(mora.MoraId);
+        var Buscado = MorasBLL.Buscar(mora.MoraId);
 
-        if (Eliminado)
+        if(Buscado != null)
         {
-            Nuevo();
-            Toast.ShowSuccess("Eliminado correctamente");
+            foreach (var item in mora.Detalle)
+            {
+                var Prestamo = PrestamosBLL.Buscar(item.PrestamoId);
+                var persona = PersonasBLL.Buscar(Prestamo.PersonaId);
+
+                persona.Balance -= item.Valor;
+
+                PersonasBLL.Guardar(persona);
+            }
+
+            Eliminado = MorasBLL.Eliminar(mora.MoraId);
+
+            if (Eliminado)
+            {
+                Nuevo();
+                Toast.ShowSuccess("Eliminado correctamente");
+            }
+            else
+                Toast.ShowError("No fue posible eliminar");
         }
         else
-            Toast.ShowError("No fue posible eliminar");
+            Toast.ShowError("Mora no existes");
+
     }
 }

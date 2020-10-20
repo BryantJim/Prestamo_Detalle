@@ -84,8 +84,6 @@
 
     List<Personas> ListaPersonas = new List<Personas>();
 
-    public double MontoAnterior { get; set; }
-
     protected override void OnInitialized()
     {
         Nuevo();
@@ -119,38 +117,17 @@
     private void Guardar()
     {
         bool Guardado;
-        bool existe = false;
-        List<Prestamos> Lista = new List<Prestamos>();
-        Lista = PrestamosBLL.GetList(c => true);
+        
+        Guardado = PrestamosBLL.Guardar(prestamo);
 
-        if (prestamo.PrestamoId == 0)
+        if (Guardado)
         {
-            foreach (var item in Lista)
-            {
-                if (item.PersonaId == PersonaSeleccionada)
-                {
-                    existe = true;
-                    break;
-                }
-                else
-                    existe = false;
-            }
-        }
-
-        if (existe != true)
-        {
-            Guardado = PrestamosBLL.Guardar(prestamo);
-
-            if (Guardado)
-            {
-                Nuevo();
-                Toast.ShowSuccess("Guardado correctamente");
-            }
-            else
-                Toast.ShowError("No fue posible guardar");
+            Nuevo();
+            Toast.ShowSuccess("Guardado correctamente");
         }
         else
-            Toast.ShowError("Persona ya tiene un prestamo");
+            Toast.ShowError("No fue posible guardar");
+        
     }
 
     private void Eliminar()

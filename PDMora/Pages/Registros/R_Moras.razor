@@ -37,7 +37,9 @@
                             <option value="0" disabled selected>Seleccione un prestamo</option>
                             @foreach (var item in ListaPrestamo)
                             {
-                                <option value="@item.PrestamoId">@item.PrestamoId</option>
+                                @((prestamo) = PrestamosBLL.Buscar(item.PrestamoId));
+                                @((persona) = PersonasBLL.Buscar(prestamo.PersonaId));
+                                <option value="@prestamo.PrestamoId">Id: @prestamo.PrestamoId , Cliente: @persona.Nombres</option>
                             }
                         </select>
                         </div>
@@ -93,6 +95,12 @@
 @code
 {
     private Moras mora = new Moras();
+
+    public string Nombre { get; set; }
+    public int prestamoId { get; set; }
+
+    Personas persona = new Personas();
+    Prestamos prestamo = new Prestamos();
 
     public int PrestamoSeleccionado { get; set; }
     public double ValorM { get; set; }
